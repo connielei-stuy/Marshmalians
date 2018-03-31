@@ -21,3 +21,4 @@ The user will get to search for another college to see on the graph instead, and
 It will allow the user to find out if colleges affect future salary.
 
 ## Explanation of D3 feature utilization.
+We plan to use SVG objects to move the peices of moving data to display how different factors affect one's future income. Each dot (representing each person) on the map will be its own div or svg element - this allows us to modify the color of the region and movement with D3. It will form a live animated map. 
