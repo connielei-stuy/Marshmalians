@@ -2,23 +2,23 @@
 Fabiha Ahmed, Max Zlotskiy, Connie Lei, Cynthia Cheng
 
 ## Data Description and Source
-How race and gender, and college attended affect your income. https://www.payscale.com/college-salary-report/bachelors?page=101
+A record for every tree in New York City and includes the tree's location by borough and latitude/longitude, species by Latin name and common names, size, health, and issues with the tree's roots, trunk, and branches.
+https://www.kaggle.com/nycparks/tree-census/data
 
 ## Relevance/Significance
-We're hoping to show trends between race, gender, college attended, and future salary
+Track progress of trees throughout NYC.
 
 ## Explanation, in broad strokes if necessary, of how you aim to make this data come alive.
-We will make this data come alive by showing moving pieces going from college attended, placed on the left side of the screen, across the screen to future income earned. 
-https://www.nytimes.com/interactive/2018/03/19/upshot/race-class-white-and-black-men.html
+Dots or pictures of trees grow or decrease over time based on the data. They’ll be on a map of NYC, at their real locations.
 
 ## What will be shown, absent user interaction?
-The top five best colleges for salary potential will be the initial graph shown, with the colleges on one side and pieces flowing through the early career salaries in the middle to the mid career salaries on the other side.
+Map of trees in NYC today in general, options to select specific boroughs or years.
 
 ## How will user interact with your visualization?
-The user will get to search for another college to see on the graph instead, and remove the current colleges shown on the graph. They will also be able to choose a specific race or gender which will show different colored pieces for different races or genders.
+The user will get to filter the map by certain criteria, for example if the tree is in good health or what borough it’s in.
 
 ## What questions will your visualization allow user to explore? What questions will it provoke?
-It will allow the user to find out if colleges affect future salary.
+It will allow the user to explore the status of trees today in NYC, their health and condition. It’ll provoke questions of the green space within the city, why does the map look the way it does.
 
 ## Explanation of D3 feature utilization.
-We plan to use SVG objects to move the peices of moving data to display how different factors affect one's future income. Each dot (representing each person) on the map will be its own div or svg element - this allows us to modify the color of the region and movement with D3. It will form a live animated map. 
+Dots to represent trees, green dots for excellent health, yellow for good, red for poor health. Number of dots will in certain areas over the years.
