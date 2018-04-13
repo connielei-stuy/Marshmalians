@@ -4,10 +4,11 @@ var data = {"objects":[
     {"circle":{"coordinates":[40.70,-73.99]}},
     {"circle":{"coordinates":[40.77,-73.90]}},
     {"circle":{"coordinates":[40.79,-73.98]}}
-]}
+    ]}
 
+/*var data = JSON.parse(document.getElementById('map').getAttribute("name"));*/
 
-var map = L.map('map').setView([40.7831, -73.9712], 8);
+var map = L.map('map').setView([40.707895, -73.931150], 11);
 mapLink = 
     '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 L.tileLayer(
@@ -23,7 +24,6 @@ map._initPathRoot()
 var svg = d3.select("#map").select("svg"),
     g = svg.append("g");
 
-/*
 var dots = function(collection) {
 
     collection.objects.forEach(function(d) {
@@ -36,8 +36,8 @@ var dots = function(collection) {
 	.enter().append("circle")
 	.style("stroke", "black")  
 	.style("opacity", .6) 
-	.style("fill", "red")
-	.attr("r", 20);  
+	.style("fill", "green")
+	.attr("r", 10);  
     
     map.on("viewreset", update);
     update();
@@ -53,4 +53,6 @@ var dots = function(collection) {
     }
 }
 
-dots(data);*/
+dots(data);
+/*
+*/

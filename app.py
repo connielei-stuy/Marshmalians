@@ -6,7 +6,7 @@ app = Flask(__name__)
 #home page?
 @app.route('/')
 def home():
-    return render_template("map.html")
+    return render_template("map.html", trees=trees.jsonString)
 
 #This will be requested by map.html
 @app.route('/treedots.js')
