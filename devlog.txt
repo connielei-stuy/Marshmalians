@@ -1,0 +1,20 @@
+ahmedF -- 2018-03-29 14:25:53
+Initial Commits, readme project design
+
+ahmedF -- 2018-03-30 14:49:25
+Updated readme: college to career data
+
+ahmedF, zlotskiyM -- 2018-04-09 14:50:11
+Updated readme: tree data
+
+ahmedF -- 2018-04-11 14:49:23
+Added tree data file.
+
+ahmedF -- 2018-04-11 21:37:20
+Add map and sample code for plotting tree dots.
+
+
+
+ahmedF -- 2018-04-13 19:24:13
+Plotted the tree points.
+
