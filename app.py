@@ -13,6 +13,11 @@ def home():
 def jsfile():
     return render_template("treedots.js", trees=data.jsonString)
 
+@app.route('/about')
+def about_page():
+    return render_template("about.html")
+
 if __name__ == "__main__":
+    data.load("data/2015_small.csv")
     app.debug = True
     app.run()
