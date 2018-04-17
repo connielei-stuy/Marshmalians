@@ -6,9 +6,6 @@
        rel="stylesheet" 
        href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"
        />
-    <script>
-      var d = {{ trees|tojson }}
-    </script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
 
     <script
@@ -19,9 +16,9 @@
 
     <h1> Trees of NYC </h1>
        
-    <div name='{{trees}}' id="map" style="width:80em; height:60em"></div>
+    <div id="map" style="width:80em; height:60em"></div>
 
-    <script type="text/javascript" src="../static/map.js"></script>
+    <!--<script type="text/javascript" src="../static/map.js"></script>-->
     <script type="text/javascript" src="treedots.js"></script>
 
   </body>

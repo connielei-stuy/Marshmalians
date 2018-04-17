@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, Response
 import utils.data as data
 
 app = Flask(__name__)
@@ -11,7 +11,7 @@ def home():
 #This will be requested by map.html
 @app.route('/treedots.js')
 def jsfile():
-    return render_template("treedots.js", trees=data.getJson("trees"))
+    return Response(render_template("treedots.js", trees=data.getJson("trees")), mimetype="text/javascript")
 
 @app.route('/about')
 def about_page():
