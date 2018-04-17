@@ -10,7 +10,10 @@ Updated readme: tree data
 ahmedF -- 2018-04-11 14:49:23
 Added tree data file.
 
-ahmedF -- 2018-04-11 21:37:20
+zlotskiyM -- 2018-04-11 23:32
+Cleaned a bit of tree data from 2015 and wrote python code to convert it into json and serve it to the template.
+
+ahmedF -- 2018-04-11 23:37:20
 Add map and sample code for plotting tree dots.
 
 
@@ -18,3 +21,10 @@ Add map and sample code for plotting tree dots.
 ahmedF -- 2018-04-13 19:24:13
 Plotted the tree points.
 
+zlotskiyM -- 2018-04-16 14:32:04
+Made a more general cache for the data to be stored in. This way, we can load all the raw data when the server starts and then not have to re-open the files again.
+
+
+
+zlotskiyM -- 2018-04-17 14:45:58
+Cleaned up the javascript template by merging it with the static one.
