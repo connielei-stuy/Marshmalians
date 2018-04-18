@@ -22,3 +22,16 @@ def load(fileName, keyName):
     csvFile.close()
     #now convert to json and store as string
     cache[keyName] = json.dumps(rowList)
+
+#Shazam "I will be with you again"
+#example: count("trees", "spc_latin") -> {Homo Sapiens: 4, Canas Lupus: 0}
+def count(fileKeyName, column):
+    array = json.loads(getJson(fileKeyName))
+    amounts = {}
+    for row in array:
+        value = row[column]
+        if value in amounts:
+            amounts[value] += 1
+        else:
+            amounts[value] = 1
+    return amounts
