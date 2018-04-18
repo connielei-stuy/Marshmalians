@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Marshmalians</title>
+    <title>Marshmalians NYC</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link 
        rel="stylesheet" 
        href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"
@@ -13,11 +14,33 @@
     </script>
   </head>
   <body>
+    <div class="container">
+      <h1> New York City Neighborhoods </h1>
+      <p> Welcome to our data analysis of the neighborhoods of New York City. You can see the displacement of trees throughout NYC, as well as crimes or fires reported and the origin of the reports. You can also look at homeless centers throughout NYC and compare it to the number of trees in the area or crimes or housefires reported. </p>
 
-    <h1> Trees of NYC </h1>
-       
-    <div id="map" style="width:80em; height:60em"></div>
+      <div class="form-check">
+	<input type="checkbox" class="form-check-input" id="trees" checked="checked">
+	<label class="form-check-label" for="checkbox100">Trees of NYC</label>
+      </div>
 
+      <div class="form-check">
+	<input type="checkbox" class="filled-in form-check-input" id="fires">
+	<label class="form-check-label" for="checkbox101">Housefires reported</label>
+      </div>
+
+      <div class="form-check">
+	<input type="checkbox" class="form-check-input" id="crime">
+	<label class="form-check-label" for="checkbox100">Crimes reported</label>
+      </div>
+
+      <div class="form-check">
+	<input type="checkbox" class="filled-in form-check-input" id="homeless">
+	<label class="form-check-label" for="checkbox101">Homeless shelters</label>
+      </div>
+      
+      <br>
+      <div id="map" style="width:80em; height:60em"></div>
+    </div>
     <!--<script type="text/javascript" src="../static/map.js"></script>-->
     <script type="text/javascript" src="treedots.js"></script>
 
