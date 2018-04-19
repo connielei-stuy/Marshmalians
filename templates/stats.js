@@ -1,7 +1,44 @@
 var species = {{ species | tojson }};
 //var container = document.getElementById("piechart");
 
-//for(var k in species) container.innerHTML += (k + ": " + species[k] + "<br>");
+for(var k in species) document.body.innerHTML += (k + ": " + species[k] + "<br>");
+
+var rgbToHex = function(r, g, b) {
+    var str = "#";
+    r = Math.min(255, parseInt(r));
+    g = Math.min(255, parseInt(g));
+    b = Math.min(255, parseInt(b));
+    var digit = function(n) {
+	return ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'][n];
+    };
+    str += digit(r % 16);
+    str += digit(parseInt(r / 16));
+    str += digit(g % 16);
+    str += digit(parseInt(g / 16));
+    str += digit(b % 16);
+    str += digit(parseInt(b / 16));
+    return str;
+}
+
+var getGreenColor = function(index) {
+    var g = Math.random() * 200 + 10 * index;
+    return rgbToHex((5 * (g % 20)), g, (5 * (g / 20)));
+};
+
+var loadSpeciesData = function() {
+    var content = [];
+    for(var k in species) {
+	label = k;
+	if(k == "") label = "Unknown";
+	content.push({
+	    label: label,
+	    value: species[k],
+	    color: getGreenColor(content.length)
+	});
+	console.log(content[content.length - 1].color);
+    }
+    return content;
+};
 
 var pie = new d3pie("pieChart", {
 	"header": {
@@ -25,89 +62,14 @@ var pie = new d3pie("pieChart", {
 		"location": "bottom-left"
 	},
 	"size": {
-		"canvasWidth": 590,
+		"canvasWidth": 800,
 		"pieInnerRadius": "85%",
 		"pieOuterRadius": "70%"
 	},
 	"data": {
-		"sortOrder": "value-desc",
-		"content": [
-			{
-				"label": "Spiders",
-				"value": 2,
-				"color": "#022c00"
-			},
-			{
-				"label": "Mother-in-laws",
-				"value": 10,
-				"color": "#043500"
-			},
-			{
-				"label": "Sharks",
-				"value": 8,
-				"color": "#043d01"
-			},
-			{
-				"label": "Alien invasion",
-				"value": 8,
-				"color": "#044200"
-			},
-			{
-				"label": "Learning Objective-C",
-				"value": 5,
-				"color": "#054b00"
-			},
-			{
-				"label": "Public speaking",
-				"value": 3,
-				"color": "#075502"
-			},
-			{
-				"label": "Donald Trump",
-				"value": 4,
-				"color": "#085d00"
-			},
-			{
-				"label": "The Zombie Apocalypse",
-				"value": 4,
-				"color": "#076100"
-			},
-			{
-				"label": "The City of Winnipeg *",
-				"value": 3,
-				"color": "#066900"
-			},
-			{
-				"label": "IE 6",
-				"value": 2,
-				"color": "#097001"
-			},
-			{
-				"label": "Planes with/out snakes",
-				"value": 5,
-				"color": "#0a7603"
-			},
-			{
-				"label": "Off-by-one errors",
-				"value": 3,
-				"color": "#0c7c03"
-			},
-			{
-				"label": "Chickadees",
-				"value": 4,
-				"color": "#0e8006"
-			},
-			{
-				"label": "Owning a cat",
-				"value": 1,
-				"color": "#0f8607"
-			},
-			{
-				"label": "Canada",
-				"value": 4,
-				"color": "#128b08"
-			}
-		]
+	        "sortOrder": "value-desc",
+	        "smallSegmentGrouping": {"enabled": true},
+	        "content": (function() {return loadSpeciesData();})()
 	},
 	"labels": {
 		"outer": {
