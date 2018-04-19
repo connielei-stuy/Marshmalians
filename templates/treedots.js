@@ -29,43 +29,42 @@ var disselect = function(obj, health, htmldisplay){
     if(health == "Good") obj.style("fill","green");
     else if(health == "Poor") obj.style("fill", "yellow");
     else obj.style("fill", "orange");
-    //console.log(htmldisplay);
-
+    
     if(htmldisplay != null) info.removeChild(htmldisplay);
 }
 
 var display = function(data){
     var d = document.createElement("div");
     d.className = "display";
-    //console.log(data);
     d.innerHTML = (`${data["address"]} ${data["boroname"]} ${data["zip_city"]} ${data["zipcode"]}`);
-    //console.log(d.innerHTML);
     info.appendChild(d);
     return d;
 }
 
-var selected = function(obj, data){
-    selecting(obj);
-    let htmldisplay = display(data);
+var clicked = function(obj, data, i){
     obj.on({"mouseout": function(){},
-	    "click": function(){ disselect(obj, data["health"], htmldisplay);
-				 obj.on({"click": function(){ unselected(obj, data); },
-					 "mouseout": function(){ disselect(obj, data["health"], null); },
-					 "mouseover": function(){selecting(obj);
-								 let hd = display(data);
-								 obj.on({"mouseout": function(){ let obj = d3.select(this);
-												 let data = obj.datum();
-												 disselect(obj, data["health"], hd); },
-									 "click": function(){ disselect(obj, data["health"], hd);
-											      selected(obj, data); } });}
-					});
-			       },
-	    "mouseover": function(){} });
+	    "mouseover": function(){},
+	    "click": function(){ disselect(obj, data["health"], i);
+				 mouseSetup(obj, data, "trees"); }
+	   });
 }
 
-var unselected = function(obj, data){
-    selected(obj, data);
+var hovering = function(obj, data, i){
+    obj.on({"mouseout": function(){ disselect(obj, data["health"], i); },
+	    "click": function(){ clicked(obj, data, i); }
+	   });
 }
+
+var mouseSetup = function(obj, data, type){
+    if(type == "trees"){
+	obj.on("mouseover", function(){ selecting(obj);
+					let i = display(data);
+					hovering(obj, data, i);
+				      } //end mouseover function
+	      )//end on
+    }//end trees
+
+} //end mouseSetup
 
 var treeOps = function(feature){
     feature.style("fill", function(d){
@@ -73,23 +72,9 @@ var treeOps = function(feature){
 	else if(d.health == "Poor") return "yellow";
 	else return "orange";
     })
-	.on({"mouseout": function() { let obj = d3.select(this);
+	.on("mouseover", function() { let obj = d3.select(this);
 				      let data = obj.datum();
-				      disselect(obj, data["health"], null); },
-	     "mouseover": function() { let obj = d3.select(this);
-				       let data = obj.datum();
-				       selecting(obj);
-				       let htmldisplay = display(data);
-				       //console.log(htmldisplay);
-				       obj.on({"mouseout": function(){ let obj = d3.select(this);
-								       let data = obj.datum();
-								       disselect(obj, data["health"], htmldisplay); },
-					       "click": function(){ disselect(obj, data["health"], htmldisplay);
-								    selected(obj, data); } }); },
-	     "click":  function() { let obj = d3.select(this);
-				    let data = obj.datum();
-				    selected(obj, data); }
-	    });
+				      mouseSetup( obj, data, "trees" ); } );
 
 }
 //---------- TREES FUNCTIONS -------------//
@@ -105,7 +90,6 @@ var addFeature = function(g, collection, type){
 
     feature.style("stroke", "black")
 	.style("opacity", .6)
-
 	.attr("r", 5)
 	.attr("class", type);
 
