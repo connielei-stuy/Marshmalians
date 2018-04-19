@@ -94,13 +94,14 @@ var treeOps = function(feature){
 //---------- TREES FUNCTIONS -------------//
 
 var addFeature = function(g, collection, type){
-    var feature = g.selectAll("circle")
+    var feature = g.selectAll("circle" + "." + type)
 	.data(collection)
 	.enter().append("circle");
 
     feature.style("stroke", "black")  
 	.style("opacity", .6)
-	.attr("r", 10);
+	.attr("r", 10)
+	.attr("class", type);
 
     if(type == "trees"){ treeOps(feature); }
 
