@@ -3,8 +3,8 @@
   <head>
     <title>Marshmalians NYC</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <link 
-       rel="stylesheet" 
+    <link
+       rel="stylesheet"
        href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"
        />
     <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -18,6 +18,9 @@
       <h1> New York City Neighborhoods </h1>
       <p> Welcome to our data analysis of the neighborhoods of New York City. You can see the displacement of trees throughout NYC, as well as crimes or fires reported and the origin of the reports. You can also look at homeless centers throughout NYC and compare it to the number of trees in the area or crimes or housefires reported. </p>
 
+      <table>
+        <td>
+         <h3> Select the data you would like to compare:     </h3>
       <div class="form-check">
 	<input type="checkbox" class="form-check-input" id="trees" checked="checked">
 	<label class="form-check-label" for="checkbox100">Trees of NYC</label>
@@ -37,8 +40,20 @@
 	<input type="checkbox" class="filled-in form-check-input" id="homeless">
 	<label class="form-check-label" for="checkbox101">Homeless shelters</label>
       </div>
-      
-      <br>
+    </td>
+    <td>
+    </td>
+    <td>
+  <h3> Circles Key </h3>
+  <p> Green : Healthy <br>
+   Orange : Fair <br>
+   Yellow : Poor
+   </p>
+ </td>
+
+  </table>
+
+
       <div class="row">
 	<div class="col-lg-6" id="map" style="width:60em; height:40em"></div>
 	<!--Div to add info about selected item -->
