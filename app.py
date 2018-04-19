@@ -20,8 +20,8 @@ def compare_parish():
 #This will be used to generate responsive charts
 @app.route('/scripts/boroughs.js')
 def jsfile2():
-    print data.count("trees", "spc_latin")
-    return Response(render_template("stats.js", species=data.count("trees", "spc_latin")), mimetype="text/javascript")
+    where = request.args.get("city", "NYC")
+    return Response(render_template("stats.js", species=data.count("trees", "spc_latin"), borough=where), mimetype="text/javascript")
 
 if __name__ == "__main__":
     data.load("data/trees_1k_2015.csv", "trees")
