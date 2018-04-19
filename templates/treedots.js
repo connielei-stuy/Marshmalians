@@ -28,15 +28,17 @@ var disselect = function(obj, health, htmldisplay){
     if(health == "Good") obj.style("fill","green");
     else if(health == "Poor") obj.style("fill", "yellow");
     else obj.style("fill", "orange");
-    info.removeChild(htmldisplay);
+    console.log(htmldisplay);
+
+    if(htmldisplay != null) info.removeChild(htmldisplay);
 }
 
 var display = function(data){
     var d = document.createElement("div");
     d.className = "display";
-    console.log(data);
+    //console.log(data);
     d.innerHTML = (`${data["address"]} ${data["boroname"]} ${data["zip_city"]} ${data["zipcode"]}`);
-    console.log(d.innerHTML);
+    //console.log(d.innerHTML);
     info.appendChild(d);
     return d;
 }
@@ -87,7 +89,7 @@ var addFeature = function(g, collection, type){
 					   let data = obj.datum();
 					   selecting(obj);
 					   let htmldisplay = display(data);
-					   console.log(htmldisplay);
+					   //console.log(htmldisplay);
 					   obj.on({"mouseout": function(){ let obj = d3.select(this);
 									   let data = obj.datum();
 									   disselect(obj, data["health"], htmldisplay); },
