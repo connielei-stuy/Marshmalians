@@ -11,11 +11,34 @@ L.tileLayer(
     }).addTo(map);
 
 /* Initialize the SVG layer */
-map._initPathRoot()    
+map._initPathRoot();    
 
 /* We simply pick up the SVG from the map object */
 var svg = d3.select("#map").select("svg"),
     g = svg.append("g");
+
+//var dis = document.getElementById("display");
+
+var selecting = function(obj){
+    obj.style("fill", "blue");
+}
+
+var disselect = function(obj, health, htmldisplay){
+    if(health == "Good") obj.style("fill","green");
+    else if(health == "Poor") obj.style("fill", "yellow");
+    else obj.style("fill", "orange");
+    //dis.removeChild(htmldisplay);
+}
+
+var display = function(data){
+    var d = document.createElement("div");
+    d.className = "display";
+    console.log(data);
+    d.innerHTML = (`${data["address"]} ${data["boroname"]} ${data["zip_city"]} ${data["zipcode"]}`);
+    console.log(d.innerHTML);
+    //dis.appendElement(d);
+    //return d;
+}
 
 var addFeature = function(g, collection){
     var feature = g.selectAll("circle")
@@ -24,12 +47,55 @@ var addFeature = function(g, collection){
 
     feature.style("stroke", "black")  
 	.style("opacity", .6) 
-	.style("fill", "green")
+	.style("fill", function(d){
+	    if(d.health == "Good") return "green";
+	    else if(d.health == "Poor") return "yellow";
+	    else return "orange";
+	})
 	.attr("r", 10)
-	.on("mouseover", function(){ d3.select(this).style("fill","yellow"); })
-	.on("mouseout", function(){ d3.select(this).style("fill","green"); });
+	.on({
+            "mouseout": function() { let obj = d3.select(this);
+				     let data = obj.datum();
+				     disselect(obj, data["health"], null);
+				   },
+            "mouseover": function() { let obj = d3.select(this);
+				      let data = obj.datum();
 
+				      selecting(obj);
+				      //let htmldisplay = display(data);
+				      /*
+					obj.on("mouseout", function(){
+					let obj = d3.select(this);
+					let data = obj.datum();
+					//disselect(obj, data["health"], htmldisplay);
+					}
+					);
+				      */
+				    }, 
+            "click":  function() { let obj = d3.select(this);
+				   let data = obj.datum();
+
+				   selected(obj, data);
+				 } 
+        });
+    
     return feature;
+}
+
+var selected = function(obj, data){
+    selecting(obj);
+    let htmldisplay = display(data);
+    obj.on({"mouseout": function(){},
+	    "click": function(){ disselect(obj, data["health"], htmldisplay);
+				 obj.on("click", function(){
+				     unselected(obj, data);
+				 });
+			       }
+	   });
+}
+
+var unselected = function(obj, data){
+    selected(obj, data);
 }
 
 var dots = function(collection) {
