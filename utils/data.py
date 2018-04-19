@@ -11,6 +11,9 @@ def getJson(name):
     else:
         return "[]"
 
+def getData(name):
+    return json.loads(getJson(name))
+
 #Stores the contents of a csv file (fileName, beginning with "data/") as a json string; use getJson(keyName) to access the data
 def load(fileName, keyName):
     # Load csv file into a list of dictionaries; the key names are the column names from the first row
