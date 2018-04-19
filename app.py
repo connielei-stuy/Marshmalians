@@ -13,11 +13,16 @@ def home():
 def jsfile():
     return Response(render_template("treedots.js", trees=data.getJson("trees")), mimetype="text/javascript")
 
-@app.route('/about')
-def about_page():
-    return render_template("about.html")
+@app.route('/charts/boroughs.html')
+def compare_parish():
+    return render_template("borough.html")
+
+#This will be used to generate responsive charts
+@app.route('/stats.js')
+def jsfile2():
+    return Response(render_template("stats.js", data="[]"), mimetype="text/javascript")
 
 if __name__ == "__main__":
-    data.load("data/2015_small.csv", "trees")
+    data.load("data/trees_1k_2015.csv", "trees")
     app.debug = True
     app.run()
