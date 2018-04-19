@@ -9,7 +9,7 @@ def home():
     return render_template("map.html", trees=data.getJson("trees"))
 
 #This will be requested by map.html
-@app.route('/treedots.js')
+@app.route('/scripts/treedots.js')
 def jsfile():
     return Response(render_template("treedots.js", trees=data.getJson("trees")), mimetype="text/javascript")
 
@@ -18,9 +18,10 @@ def compare_parish():
     return render_template("borough.html")
 
 #This will be used to generate responsive charts
-@app.route('/stats.js')
+@app.route('/scripts/boroughs.js')
 def jsfile2():
-    return Response(render_template("stats.js", data="[]"), mimetype="text/javascript")
+    print data.count("trees", "spc_latin")
+    return Response(render_template("stats.js", species=data.count("trees", "spc_latin")), mimetype="text/javascript")
 
 if __name__ == "__main__":
     data.load("data/trees_1k_2015.csv", "trees")
