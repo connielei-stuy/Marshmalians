@@ -28,7 +28,7 @@ var disselect = function(obj, health, htmldisplay){
     if(health == "Good") obj.style("fill","green");
     else if(health == "Poor") obj.style("fill", "yellow");
     else obj.style("fill", "orange");
-    console.log(htmldisplay);
+    //console.log(htmldisplay);
 
     if(htmldisplay != null) info.removeChild(htmldisplay);
 }
@@ -65,6 +65,32 @@ var selected = function(obj, data){
 var unselected = function(obj, data){
     selected(obj, data);
 }
+
+var treeOps = function(feature){
+    feature.style("fill", function(d){
+	if(d.health == "Good") return "green";
+	else if(d.health == "Poor") return "yellow";
+	else return "orange";
+    })
+	.on({"mouseout": function() { let obj = d3.select(this);
+				      let data = obj.datum();
+				      disselect(obj, data["health"], null); },
+	     "mouseover": function() { let obj = d3.select(this);
+				       let data = obj.datum();
+				       selecting(obj);
+				       let htmldisplay = display(data);
+				       //console.log(htmldisplay);
+				       obj.on({"mouseout": function(){ let obj = d3.select(this);
+								       let data = obj.datum();
+								       disselect(obj, data["health"], htmldisplay); },
+					       "click": function(){ disselect(obj, data["health"], htmldisplay);
+								    selected(obj, data); } }); }, 
+	     "click":  function() { let obj = d3.select(this);
+				    let data = obj.datum();
+				    selected(obj, data); } 
+	    });
+
+}
 //---------- TREES FUNCTIONS -------------//
 
 var addFeature = function(g, collection, type){
@@ -76,30 +102,7 @@ var addFeature = function(g, collection, type){
 	.style("opacity", .6)
 	.attr("r", 10);
 
-    if(type == "trees"){
-	feature.style("fill", function(d){
-	    if(d.health == "Good") return "green";
-	    else if(d.health == "Poor") return "yellow";
-	    else return "orange";
-	})
-	    .on({"mouseout": function() { let obj = d3.select(this);
-					  let data = obj.datum();
-					  disselect(obj, data["health"], null); },
-		 "mouseover": function() { let obj = d3.select(this);
-					   let data = obj.datum();
-					   selecting(obj);
-					   let htmldisplay = display(data);
-					   //console.log(htmldisplay);
-					   obj.on({"mouseout": function(){ let obj = d3.select(this);
-									   let data = obj.datum();
-									   disselect(obj, data["health"], htmldisplay); },
-						   "click": function(){ disselect(obj, data["health"], htmldisplay);
-								        selected(obj, data); } }); }, 
-		 "click":  function() { let obj = d3.select(this);
-					let data = obj.datum();
-					selected(obj, data); } 
-		});
-    }
+    if(type == "trees"){ treeOps(feature); }
 
     else if(type == "fire"){ }
     else if (type == "crime"){ }
@@ -126,3 +129,6 @@ var dots = function(collection, type) {
 }
 
 dots(data_2015_trees, "trees");
+//dots(crime, "crime");
+//dots(shelters, "shelters");
+//dots(fire, "fire");
