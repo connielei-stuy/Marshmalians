@@ -1,10 +1,11 @@
 //The Jinja Template System will turn this into a js array of objects
 var data_2015_trees = {{ trees }};
 
-var map = L.map('map').setView([40.707895, -73.931150], 11);
+var map = L.map('map').setView([40.707895, -73.931150], 10).setMaxBounds([[40.95708558389897,-73.43673706054688],[40.457397087754444,-74.42550659179688]]);
 mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	minZoom: 9,
 	maxZoom: 19,
         attribution: '&copy; ' + mapLink + ' Contributors'
     }).addTo(map);

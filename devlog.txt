@@ -30,3 +30,6 @@ Cleaned up the javascript template by merging it with the static one.
 ahmedF -- 2018-04-18 14:49:43
 Added brief description and checkboxes (that don't do anything yet)
 
+ahmedF -- 2018-04-18 21:54:41
+Added map bounds and min zoom and info html div
+
