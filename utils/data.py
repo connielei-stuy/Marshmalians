@@ -28,13 +28,14 @@ def load(fileName, keyName):
 
 #Shazam "I will be with you again"
 #example: count("trees", "spc_latin") -> {Homo Sapiens: 4, Canas Lupus: 0}
-def count(fileKeyName, column):
-    array = json.loads(getJson(fileKeyName))
+def count(fileKeyName, column, filter=lambda x: True):
+    array = getData(fileKeyName)
     amounts = {}
     for row in array:
-        value = row[column]
-        if value in amounts:
-            amounts[value] += 1
-        else:
-            amounts[value] = 1
+        if filter(row) == True:
+            value = row[column]
+            if value in amounts:
+                amounts[value] += 1
+            else:
+                amounts[value] = 1
     return amounts
