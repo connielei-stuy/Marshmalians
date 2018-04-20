@@ -21,7 +21,8 @@ def compare_parish():
 @app.route('/scripts/boroughs.js')
 def jsfile2():
     where = request.args.get("city", "NYC")
-    return Response(render_template("stats.js", species=data.count("trees", "spc_latin"), borough=where), mimetype="text/javascript")
+    speciesSums = data.count("trees", "spc_latin")
+    return Response(render_template("stats.js", species=speciesSums, borough=where), mimetype="text/javascript")
 
 if __name__ == "__main__":
     data.load("data/trees_1k_2015.csv", "trees")
