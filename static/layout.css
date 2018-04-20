@@ -21,6 +21,11 @@ a.filter {
     margin-left: auto;
     border-bottom: 2px solid #888;
 }
+table.info {
+    border-collapse: collapse;
+}
+table.info th {background-color: #DBA279;}
+table.info tr:nth-child(odd) {background-color: #E0CABA;}/*#D4AC90;*/
 /* map.html */
 .grayBox {
     background-color: #ddd;

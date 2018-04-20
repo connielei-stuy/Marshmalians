@@ -5,8 +5,11 @@ for(var k in species) {
 	numSpecies++;
 }
 var container = document.getElementById("speciesTable");
-for(var k in species) container.innerHTML += "<tr><td>" + k + "</td><td>" + species[k] + "</td></tr>";
-
+for(var k in species) {
+	var tr = document.createElement("tr");
+	tr.innerHTML = "<td>" + k + "</td><td>" + species[k] + "</td></tr>";
+	container.appendChild(tr);
+}
 /* Converts three numbers (r, g, b) into a CSS hex color code */
 var rgbToHex = function(r, g, b) {
     var str = "#";
