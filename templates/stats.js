@@ -134,3 +134,12 @@ var pie = new d3pie("pieChart", {
 		}
 	}
 });
+
+/* Make the tree diameter bar chart */
+var diameters = {{ diameters | tojson }};
+var diameterList = [], diameterFrequency = [];
+for(var k in diameters) {
+    diameterList.push({key: k, value: diameters[k]});
+}
+diameterList.sort(function(a, b) {return parseFloat(a.key) - parseFloat(b.key);});
+d3.select("#barChart").selectAll(".bar").data(diameterList).enter().append("div").attr("class", "bar").text(function (d) {return d.key;}).style("height", function(d) {return (10 * parseInt(d.value)) + "px";});
