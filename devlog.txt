@@ -36,3 +36,6 @@ Added map bounds and min zoom and info html div
 ahmedF -- 2018-04-19 21:39:20
 Filters and minor edits - no stroke, zoom limit changed
 
+ahmedF -- 2018-04-19 00:10:32
+Added rat sighting data, need to personalize style attributes for each type
+

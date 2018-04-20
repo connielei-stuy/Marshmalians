@@ -1,6 +1,7 @@
 //The Jinja Template System will turn this into a js array of objects
 var data_2015_trees = {{ trees }};
 var shelters = {{ homeless }};
+var rats = {{ rats }};
 //data not added yet
 //var crime = {{ crime }};
 //var fire = {{ fire }};
@@ -140,10 +141,13 @@ var dots = function(collection, type) {
 var plot = function() {
     if(this.checked){
 	if(this.id == "trees"){
-            dots(data_2015_trees, this.id);
+            dots(data_2015_trees, "trees");
 	}
 	if(this.id == "shelters"){
-            dots(shelters, this.id);
+            dots(shelters, "shelters");
+	}
+	if(this.id == "rats"){
+	    dots(rats, "rats");
 	}
     }
     else{

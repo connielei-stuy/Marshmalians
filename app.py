@@ -11,7 +11,11 @@ def home():
 #This will be requested by map.html
 @app.route('/treedots.js')
 def jsfile():
-    return Response(render_template("treedots.js", trees=data.getJson("trees"), homeless=data.getJson("shelters")), mimetype="text/javascript")
+    return Response(render_template("treedots.js",
+                                    trees=data.getJson("trees"),
+                                    homeless=data.getJson("shelters"),
+                                    rats = data.getJson("rats")),
+                    mimetype="text/javascript")
 
 @app.route('/charts/boroughs.html')
 def compare_parish():
@@ -25,5 +29,6 @@ def jsfile2():
 if __name__ == "__main__":
     data.load("data/trees_1k_2015.csv", "trees")
     data.load("data/homeless_shelters.csv", "shelters")
+    data.load("data/rat_sightings_2015.csv", "rats")
     app.debug = True
     app.run()
