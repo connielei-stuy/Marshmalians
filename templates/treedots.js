@@ -29,7 +29,7 @@ var disselect = function(obj, health, htmldisplay){
     if(health == "Good") obj.style("fill","green");
     else if(health == "Poor") obj.style("fill", "yellow");
     else obj.style("fill", "orange");
-    
+
     if(htmldisplay != null) info.removeChild(htmldisplay);
 }
 
@@ -116,11 +116,12 @@ var dots = function(collection, type) {
 
     function update() {
       var bounds = map.getBounds();
-
-      if ( (40.95604846533965 - bounds['_northEast'].lat  >= .1) && ( -73.56033325195312 - bounds['_northEast'].lng >= .1) ) {
+      console.log(bounds['_northEast'].lat);
+      console.log(bounds['_northEast'].lng);
+      if ( (41.20552261955812 - bounds['_northEast'].lat  >= .1) && ( -73.18817138671874 - bounds['_northEast'].lng >= .1) ) {
           console.log("HM TIMES");
           console.log((-74.30191040039062 - bounds['_southWest'].lng)/.1);
-          radius = 5 - (2*((-74.30191040039062 - bounds['_southWest'].lng)/.1 ));
+          radius = 4.2 - (2*((-74.30191040039062 - bounds['_southWest'].lng)/.1 ));
           console.log(radius);
         }
 
