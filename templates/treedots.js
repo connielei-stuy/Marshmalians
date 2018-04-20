@@ -1,5 +1,9 @@
 //The Jinja Template System will turn this into a js array of objects
 var data_2015_trees = {{ trees }};
+var shelters = {{ homeless }};
+//data not added yet
+//var crime = {{ crime }};
+//var fire = {{ fire }};
 var radius = 4.5;
 
 var map = L.map('map').setView([40.707895, -73.931150], 10).setMaxBounds([[40.95708558389897,-73.43673706054688],[40.457397087754444,-74.42550659179688]]);
@@ -135,7 +139,12 @@ var dots = function(collection, type) {
 
 var plot = function() {
     if(this.checked){
-        dots(data_2015_trees, this.id);
+	if(this.id == "trees"){
+            dots(data_2015_trees, this.id);
+	}
+	if(this.id == "shelters"){
+            dots(shelters, this.id);
+	}
     }
     else{
         g.selectAll("circle" + "." + this.id).remove();
@@ -149,8 +158,6 @@ var filters = document.getElementsByClassName("form-check-input");
 for(var i=0; i < filters.length; i++){
     filters[i].addEventListener("click", plot);
 }
-
-//document.getElementById("trees").addEventListener("click", plot);
 
 //dots(crime, "crime");
 //dots(shelters, "shelters");

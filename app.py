@@ -6,12 +6,12 @@ app = Flask(__name__)
 #home page?
 @app.route('/')
 def home():
-    return render_template("map.html", trees=data.getJson("trees"))
+    return render_template("map.html")
 
 #This will be requested by map.html
 @app.route('/treedots.js')
 def jsfile():
-    return Response(render_template("treedots.js", trees=data.getJson("trees")), mimetype="text/javascript")
+    return Response(render_template("treedots.js", trees=data.getJson("trees"), homeless=data.getJson("shelters")), mimetype="text/javascript")
 
 @app.route('/charts/boroughs.html')
 def compare_parish():
@@ -24,5 +24,6 @@ def jsfile2():
 
 if __name__ == "__main__":
     data.load("data/trees_1k_2015.csv", "trees")
+    data.load("data/homeless_shelters.csv", "shelters")
     app.debug = True
     app.run()
