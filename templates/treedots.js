@@ -6,8 +6,8 @@ var map = L.map('map').setView([40.707895, -73.931150], 10).setMaxBounds([[40.95
 mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	minZoom: 9,
-	maxZoom: 19,
+	minZoom: 10,
+	maxZoom: 14,
         attribution: '&copy; ' + mapLink + ' Contributors'
     }).addTo(map);
 
@@ -88,8 +88,7 @@ var addFeature = function(g, collection, type){
 	.data(collection)
 	.enter().append("circle");
 
-    feature.style("stroke", "black")
-	.style("opacity", .6)
+    feature.style("opacity", .6)
 	.attr("r", 5)
 	.attr("class", type);
 
@@ -133,7 +132,26 @@ var dots = function(collection, type) {
     }
 }
 
+
+var plot = function() {
+    if(this.checked){
+        dots(data_2015_trees, this.id);
+    }
+    else{
+        g.selectAll("circle" + "." + this.id).remove();
+    }
+}
+
+//first page shown will have trees plotted
 dots(data_2015_trees, "trees");
+
+var filters = document.getElementsByClassName("form-check-input");
+for(var i=0; i < filters.length; i++){
+    filters[i].addEventListener("click", plot);
+}
+
+//document.getElementById("trees").addEventListener("click", plot);
+
 //dots(crime, "crime");
 //dots(shelters, "shelters");
 //dots(fire, "fire");

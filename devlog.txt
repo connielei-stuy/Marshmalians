@@ -33,3 +33,6 @@ Added brief description and checkboxes (that don't do anything yet)
 ahmedF -- 2018-04-18 21:54:41
 Added map bounds and min zoom and info html div
 
+ahmedF -- 2018-04-19 21:39:20
+Filters and minor edits - no stroke, zoom limit changed
+
