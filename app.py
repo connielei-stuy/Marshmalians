@@ -3,8 +3,13 @@ import utils.data as data
 
 app = Flask(__name__)
 
-#home page?
+#Home Page and also the About Page
 @app.route('/')
+def about_page():
+    return render_template("about.html")
+
+#A Map of our data
+@app.route('/charts/map.html')
 def home():
     return render_template("map.html")
 
@@ -17,17 +22,23 @@ def jsfile():
                                     rats = data.getJson("rats")),
                     mimetype="text/javascript")
 
+#Analyzes statistics on each borough
 @app.route('/charts/boroughs.html')
 def compare_parish():
     return render_template("borough.html", borough=request.args.get("city", "nyc"))
 
-#This will be used to generate responsive charts
+#This will be used to generate responsive charts in the boroughs page
 @app.route('/scripts/boroughs.js', methods=["GET", "POST"])
 def jsfile2():
     where = request.args.get("city", "nyc")
     speciesSums = data.count("trees", "spc_latin", filter=lambda row: row['boroname'].lower() == where.lower() or where.lower() == "nyc")
     diameters = data.count("trees", "tree_dbh", filter=lambda row: row['boroname'].lower() == where.lower() or where.lower() == "nyc")
     return Response(render_template("stats.js", species=speciesSums, borough=where, diameters=diameters), mimetype="text/javascript")
+
+#Displays scatter plots?
+@app.route('/charts/plot.html')
+def zipcodes():
+    return render_template("zipcodes.html")
 
 if __name__ == "__main__":
     data.load("data/trees_1k_2015.csv", "trees")
