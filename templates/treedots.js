@@ -33,7 +33,8 @@ var selecting = function(obj){
 var disselect = function(obj, health, htmldisplay){
     if(health == "Good") obj.style("fill","green");
     else if(health == "Poor") obj.style("fill", "yellow");
-    else obj.style("fill", "orange");
+    else if(health = "Fair") return "orange";
+    //else if ()
 
     if(htmldisplay != null) info.removeChild(htmldisplay);
 }
@@ -75,13 +76,23 @@ var treeOps = function(feature){
     feature.style("fill", function(d){
 	if(d.health == "Good") return "green";
 	else if(d.health == "Poor") return "yellow";
-	else return "orange";
+	else if(d.health = "Fair") return "orange";
+  //else if ()
     })
 	.on("mouseover", function() { let obj = d3.select(this);
 				      let data = obj.datum();
 				      mouseSetup( obj, data, "trees" ); } );
 
 }
+
+var shelterOps = function(feature){
+  feature.style("fill", "blue")
+}
+
+var ratOps = function(feature){
+  feature.style("fill", "red")
+}
+
 //---------- TREES FUNCTIONS -------------//
 
 var addFeature = function(g, collection, type){
@@ -93,16 +104,18 @@ var addFeature = function(g, collection, type){
 	.data(collection)
 	.enter().append("circle");
 
-    feature.style("opacity", .6)
+    feature.style("opacity", .65)
 	.attr("r", 5)
 	.attr("class", type);
 
     if(type == "trees"){ treeOps(feature); }
 
-    else if(type == "fire"){ }
-    else if (type == "crime"){ }
-    else if (type == "shelters"){ }
+    else if(type == "fire"){
 
+    }
+    else if (type == "crime"){ }
+    else if (type == "shelters"){ shelterOps(feature);}
+    else if (type == 'rats'){ ratOps(feature); }
     return feature;
 }
 
@@ -140,15 +153,15 @@ var dots = function(collection, type) {
 
 var plot = function() {
     if(this.checked){
-	if(this.id == "trees"){
-            dots(data_2015_trees, "trees");
-	}
-	if(this.id == "shelters"){
-            dots(shelters, "shelters");
-	}
-	if(this.id == "rats"){
-	    dots(rats, "rats");
-	}
+    	if(this.id == "trees"){
+                dots(data_2015_trees, "trees");
+    	}
+    	if(this.id == "shelters"){
+                dots(shelters, "shelters");
+    	}
+    	if(this.id == "rats"){
+    	    dots(rats, "rats");
+    	}
     }
     else{
         g.selectAll("circle" + "." + this.id).remove();
