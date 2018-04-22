@@ -26,14 +26,25 @@ table.info {
 }
 table.info th {background-color: #DBA279;}
 table.info tr:nth-child(odd) {background-color: #E0CABA;}/*#D4AC90;*/
+#barChart {
+    margin-top: 2em;
+    border: 1px solid black;
+}
+.bar {
+    background-color: #ccf;
+    height: 30px;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid white;
+}
 /* map.html */
 .grayBox {
-    background-color: #ddd;
+    background-color: #dfdfdf;
     padding: 10px;
     margin: 1in 1in;
 }
 .grayBox a {
-    color: #7cd;
+    color: #5694A2;
     display: inline-block;
     margin-left: 30px;
     margin-right: 30px;

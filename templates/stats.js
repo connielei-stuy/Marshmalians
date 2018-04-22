@@ -137,9 +137,36 @@ var pie = new d3pie("pieChart", {
 
 /* Make the tree diameter bar chart */
 var diameters = {{ diameters | tojson }};
-var diameterList = [], diameterFrequency = [];
+var diameterList = [];
 for(var k in diameters) {
     diameterList.push({key: k, value: diameters[k]});
 }
-diameterList.sort(function(a, b) {return parseFloat(a.key) - parseFloat(b.key);});
-d3.select("#barChart").selectAll(".bar").data(diameterList).enter().append("div").attr("class", "bar").text(function (d) {return d.key;}).style("height", function(d) {return (10 * parseInt(d.value)) + "px";});
+diameterList.sort(function(a, b) {
+    return parseFloat(a.key) - parseFloat(b.key);
+});
+var diametersSortedByFrequency = diameterList.slice().sort(function(a, b) {
+    return parseFloat(a.value) - parseFloat(b.value);
+});
+
+d3.select("#barChart").selectAll(".bar")
+    .data(diameterList).enter().append("div")
+    .classed("bar", true)
+    .text(function (d) {
+        return d.key;
+    })
+    .transition().duration(1000)
+    .style("width", function(d) {
+        return (10 * parseInt(d.value)) + "px";
+    });
+
+d3.select("#barChart").append("div")
+    .style("border", "1px solid black")
+    .selectAll("span")
+    .data(["Frequency:", 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]).enter()
+    .append("span")
+    .style("display", "inline-block")
+    .style("width", "100px")
+    .text(function(d) {
+        return d;
+    });
+

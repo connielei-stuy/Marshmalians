@@ -26,7 +26,8 @@ def compare_parish():
 def jsfile2():
     where = request.args.get("city", "nyc")
     speciesSums = data.count("trees", "spc_latin", filter=lambda row: row['boroname'].lower() == where.lower() or where.lower() == "nyc")
-    return Response(render_template("stats.js", species=speciesSums, borough=where), mimetype="text/javascript")
+    diameters = data.count("trees", "tree_dbh", filter=lambda row: row['boroname'].lower() == where.lower() or where.lower() == "nyc")
+    return Response(render_template("stats.js", species=speciesSums, borough=where, diameters=diameters), mimetype="text/javascript")
 
 if __name__ == "__main__":
     data.load("data/trees_1k_2015.csv", "trees")
