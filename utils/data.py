@@ -11,6 +11,9 @@ def getJson(name):
     else:
         return "[]"
 
+def getData(name):
+    return json.loads(getJson(name))
+
 #Stores the contents of a csv file (fileName, beginning with "data/") as a json string; use getJson(keyName) to access the data
 def load(fileName, keyName):
     # Load csv file into a list of dictionaries; the key names are the column names from the first row
@@ -25,13 +28,14 @@ def load(fileName, keyName):
 
 #Shazam "I will be with you again"
 #example: count("trees", "spc_latin") -> {Homo Sapiens: 4, Canas Lupus: 0}
-def count(fileKeyName, column):
-    array = json.loads(getJson(fileKeyName))
+def count(fileKeyName, column, filter=lambda x: True):
+    array = getData(fileKeyName)
     amounts = {}
     for row in array:
-        value = row[column]
-        if value in amounts:
-            amounts[value] += 1
-        else:
-            amounts[value] = 1
+        if filter(row) == True:
+            value = row[column]
+            if value in amounts:
+                amounts[value] += 1
+            else:
+                amounts[value] = 1
     return amounts

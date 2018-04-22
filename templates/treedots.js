@@ -1,13 +1,18 @@
 //The Jinja Template System will turn this into a js array of objects
 var data_2015_trees = {{ trees }};
+var shelters = {{ homeless }};
+var rats = {{ rats }};
+//data not added yet
+//var crime = {{ crime }};
+//var fire = {{ fire }};
 var radius = 4.5;
 
 var map = L.map('map').setView([40.707895, -73.931150], 10).setMaxBounds([[40.95708558389897,-73.43673706054688],[40.457397087754444,-74.42550659179688]]);
 mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	minZoom: 9,
-	maxZoom: 19,
+	minZoom: 10,
+	maxZoom: 14,
         attribution: '&copy; ' + mapLink + ' Contributors'
     }).addTo(map);
 
@@ -28,8 +33,9 @@ var selecting = function(obj){
 var disselect = function(obj, health, htmldisplay){
     if(health == "Good") obj.style("fill","green");
     else if(health == "Poor") obj.style("fill", "yellow");
-    else obj.style("fill", "orange");
-    
+    else if(health = "Fair") return "orange";
+    //else if ()
+
     if(htmldisplay != null) info.removeChild(htmldisplay);
 }
 
@@ -70,13 +76,24 @@ var treeOps = function(feature){
     feature.style("fill", function(d){
 	if(d.health == "Good") return "green";
 	else if(d.health == "Poor") return "yellow";
-	else return "orange";
+	else if(d.health = "Fair") return "orange";
+  //else if ()
     })
 	.on("mouseover", function() { let obj = d3.select(this);
 				      let data = obj.datum();
 				      mouseSetup( obj, data, "trees" ); } );
 
 }
+
+var shelterOps = function(feature){
+  feature.style("fill", "blue")
+
+}
+
+var ratOps = function(feature){
+  feature.style("fill", "red")
+}
+
 //---------- TREES FUNCTIONS -------------//
 
 var addFeature = function(g, collection, type){
@@ -88,17 +105,18 @@ var addFeature = function(g, collection, type){
 	.data(collection)
 	.enter().append("circle");
 
-    feature.style("stroke", "black")
-	.style("opacity", .6)
+    feature.style("opacity", .65)
 	.attr("r", 5)
 	.attr("class", type);
 
     if(type == "trees"){ treeOps(feature); }
 
-    else if(type == "fire"){ }
-    else if (type == "crime"){ }
-    else if (type == "shelters"){ }
+    else if(type == "fire"){
 
+    }
+    else if (type == "crime"){ }
+    else if (type == "shelters"){ shelterOps(feature);}
+    else if (type == 'rats'){ ratOps(feature); }
     return feature;
 }
 
@@ -112,16 +130,23 @@ var dots = function(collection, type) {
     var feature = addFeature(g, collection, type);
 
     map.on("viewreset", update);
-    update();
+    update(type);
 
-    function update() {
+    function update(type) {
       var bounds = map.getBounds();
-
-      if ( (40.95604846533965 - bounds['_northEast'].lat  >= .1) && ( -73.56033325195312 - bounds['_northEast'].lng >= .1) ) {
-          console.log("HM TIMES");
-          console.log((-74.30191040039062 - bounds['_southWest'].lng)/.1);
-          radius = 5 - (2*((-74.30191040039062 - bounds['_southWest'].lng)/.1 ));
-          console.log(radius);
+      if ( (41.20552261955812 - bounds['_northEast'].lat  >= .1) && ( -73.18817138671874 - bounds['_northEast'].lng >= .1) ) {
+          if (collection == shelters){
+          radius = 8 - (2*((-74.30191040039062 - bounds['_southWest'].lng)/.1 ));
+          console.log("shelter: " + radius);
+          }
+          else if (collection == rats){
+          radius = 2 - (1.25*((-74.30191040039062 - bounds['_southWest'].lng)/.1 ));
+          console.log("rats: "  + radius);
+          }
+          else{
+          radius = 4.2 - (2*((-74.30191040039062 - bounds['_southWest'].lng)/.1 ));
+          console.log("trees: " +radius);
+          }
         }
 
       console.log("RADIUS RN : " + radius);
@@ -132,7 +157,32 @@ var dots = function(collection, type) {
     }
 }
 
+
+var plot = function() {
+    if(this.checked){
+    	if(this.id == "trees"){
+                dots(data_2015_trees, "trees");
+    	}
+    	if(this.id == "shelters"){
+                dots(shelters, "shelters");
+    	}
+    	if(this.id == "rats"){
+    	    dots(rats, "rats");
+    	}
+    }
+    else{
+        g.selectAll("circle" + "." + this.id).remove();
+    }
+}
+
+//first page shown will have trees plotted
 dots(data_2015_trees, "trees");
+
+var filters = document.getElementsByClassName("form-check-input");
+for(var i=0; i < filters.length; i++){
+    filters[i].addEventListener("click", plot);
+}
+
 //dots(crime, "crime");
 //dots(shelters, "shelters");
 //dots(fire, "fire");

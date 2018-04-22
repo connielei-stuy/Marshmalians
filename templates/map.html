@@ -7,6 +7,7 @@
        rel="stylesheet"
        href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"
        />
+    <link rel="stylesheet" type="text/css" href="/static/layout.css">
     <script src="http://d3js.org/d3.v3.min.js"></script>
 
     <script
@@ -37,9 +38,14 @@
       </div>
 
       <div class="form-check">
-	<input type="checkbox" class="filled-in form-check-input" id="homeless">
+	<input type="checkbox" class="filled-in form-check-input" id="shelters">
 	<label class="form-check-label" for="checkbox101">Homeless shelters</label>
       </div>
+      <div class="form-check">
+	<input type="checkbox" class="filled-in form-check-input" id="rats">
+	<label class="form-check-label" for="checkbox101">Rat sightings</label>
+      </div>
+      
     </td>
     <td>
     </td>
@@ -54,15 +60,21 @@
   </table>
 
 
-      <div class="row">
-	<div class="col-lg-6" id="map" style="width:60em; height:40em"></div>
-	<!--Div to add info about selected item -->
-	<div style="float:right; border: 4px solid black; " class="col-lg-6" id="info"> Info </div>
-      </div>
-      <br><br>
+    <div class="row">
+      <div class="col-lg-6" id="map" style="width:60em; height:40em"></div>
+      <!--Div to add info about selected item -->
+      <div style="float:right; border: 4px solid black; " class="col-lg-6" id="info"> Info </div>
+    </div>
+    <br><br>
+    </div>
+    <div class="grayBox centered">
+        <a href="/">About the Project</a>
+        <a href="/charts/map.html">See the Map</a>
+        <a href="/charts/boroughs.html">Statistics on each borough</a>
+        <a href="/charts/plot.html">Fire and forestry scatter plots</a>
     </div>
     <!--<script type="text/javascript" src="../static/map.js"></script>-->
-    <script type="text/javascript" src="treedots.js"></script>
+    <script type="text/javascript" src="/scripts/treedots.js"></script>
 
   </body>
 </html>

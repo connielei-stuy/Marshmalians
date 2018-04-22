@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style type="text/css">
-        a {
-            display: inline-block;
-            padding: 10px;
-            text-decoration: none;
-            background-color: orange;
-            color: white;
-        }
-        .centered {text-align: center;}
-    </style>
+    <title>Sums</title>
+    <link rel="stylesheet" type="text/css" href="/static/layout.css">
 </head>
 <body>
+    <h1 class="centered">Totals</h1>
+    <h3 class="centered">Click on a borough below to filter the data displayed on this page</h3>
     <p class="centered">
-        <a href="" id="brooklyn">Brooklyn</a>
-        <a href="" id="queens">Queens</a>
-        <a href="" id="manhattan">Manhattan</a>
-        <a href="" id="staten island">Staten Island</a>
-        <a href="" id="bronx">Bronx</a>
+        <a class="filter" href="?big=apple"          id="nyc">New York City</a>
+        <a class="filter" href="?city=brooklyn"      id="brooklyn">Brooklyn</a>
+        <a class="filter" href="?city=queens"        id="queens">Queens</a>
+        <a class="filter" href="?city=manhattan"     id="manhattan">Manhattan</a>
+        <a class="filter" href="?city=staten island" id="staten island">Staten Island</a>
+        <a class="filter" href="?city=bronx"         id="bronx">Bronx</a>
     </p>
-    <div id="piechart"></div>
-    <script type="text/javascript" src="/stats.js"></script>
+    <h2 class="centered">A Pie Chart of The Species of Trees Found in {{ borough }}</h2>
+    <div id="pieChart"></div>
+    <h2 class="centered">A Table of Tree Species Frequency, Sorted Alphabetically</h2>
+    <div id="speciesTableContainer">
+        <table id="speciesTable" border="1" class="info"><tr><th>Species Name</th><th>Amount of trees of this type</th></tr></table>
+    </div>
+    <h2 class="centered">Frequency of Tree Diameters, Measured in Inches at 1.3m Off the Ground</h2>
+    <h3 class="centered">X axis: frequency; Y axis: inches</h3>
+    <div id="barChart"></div>
+    <div class="grayBox centered">
+        <a href="/">About the Project</a>
+        <a href="/charts/map.html">See the Map</a>
+        <a href="/charts/boroughs.html">Statistics on each borough</a>
+        <a href="/charts/plot.html">Fire and forestry scatter plots</a>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/4.7.2/d3.min.js"></script>
+    <script type="text/javascript" src="/static/d3pie.min.js"></script>
+    <script type="text/javascript" src="/scripts/boroughs.js?city={{borough}}"></script>
 </body>
 </html>
