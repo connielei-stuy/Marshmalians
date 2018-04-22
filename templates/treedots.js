@@ -140,7 +140,7 @@ var dots = function(collection, type) {
           console.log("shelter: " + radius);
           }
           else if (collection == rats){
-          radius = 1 - (1.25*((-74.30191040039062 - bounds['_southWest'].lng)/.1 ));
+          radius = 2 - (1.25*((-74.30191040039062 - bounds['_southWest'].lng)/.1 ));
           console.log("rats: "  + radius);
           }
           else{
