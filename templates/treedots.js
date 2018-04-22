@@ -87,6 +87,7 @@ var treeOps = function(feature){
 
 var shelterOps = function(feature){
   feature.style("fill", "blue")
+
 }
 
 var ratOps = function(feature){
@@ -129,17 +130,23 @@ var dots = function(collection, type) {
     var feature = addFeature(g, collection, type);
 
     map.on("viewreset", update);
-    update();
+    update(type);
 
-    function update() {
+    function update(type) {
       var bounds = map.getBounds();
-      console.log(bounds['_northEast'].lat);
-      console.log(bounds['_northEast'].lng);
       if ( (41.20552261955812 - bounds['_northEast'].lat  >= .1) && ( -73.18817138671874 - bounds['_northEast'].lng >= .1) ) {
-          console.log("HM TIMES");
-          console.log((-74.30191040039062 - bounds['_southWest'].lng)/.1);
+          if (collection == shelters){
+          radius = 8 - (2*((-74.30191040039062 - bounds['_southWest'].lng)/.1 ));
+          console.log("shelter: " + radius);
+          }
+          else if (collection == rats){
+          radius = 1 - (1.25*((-74.30191040039062 - bounds['_southWest'].lng)/.1 ));
+          console.log("rats: "  + radius);
+          }
+          else{
           radius = 4.2 - (2*((-74.30191040039062 - bounds['_southWest'].lng)/.1 ));
-          console.log(radius);
+          console.log("trees: " +radius);
+          }
         }
 
       console.log("RADIUS RN : " + radius);
