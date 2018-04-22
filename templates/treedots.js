@@ -86,11 +86,11 @@ var treeOps = function(feature){
 }
 
 var shelterOps = function(feature){
-  feature.style("fill", "white")
+  feature.style("fill", "blue")
 }
 
 var ratOps = function(feature){
-  feature.style("fill", "blue")
+  feature.style("fill", "red")
 }
 
 //---------- TREES FUNCTIONS -------------//
