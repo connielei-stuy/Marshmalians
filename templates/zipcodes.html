@@ -2,9 +2,11 @@
 <html>
     <head>
         <title>By Zipcode</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="/static/layout.css">
     </head>
     <body>
+      <div class="container">
         <h1 class="centered">Correlating Data By Zipcode</h1>
         <p id="tooltip">Hover over a dot</p>
         <div style="display: inline-block; border: 1px solid #222;">
@@ -34,8 +36,10 @@
                 <p class="centered"><u>Number of Trees Counted in the Zipcode</u></p>
             </div>
         </div>
+	<br><br>
         <p>Each point on the scatter plot above is a zipcode in NYC. Its x-coordinae is the amount of trees counted there. Its y-coordinate is the number of fires reported there.</p>
         <p>With our limited dataset, it is difficult to establish a correlation. Ten thousand trees and ten thousand fire reports were used to plot the points on this graph.</p>
+	</div>
         <div class="grayBox centered">
             <a href="/">About the Project</a>
             <a href="/charts/map.html">See the Map</a>

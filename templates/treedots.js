@@ -2,9 +2,6 @@
 var data_2015_trees = {{ trees }};
 var shelters = {{ homeless }};
 var rats = {{ rats }};
-//data not added yet
-//var crime = {{ crime }};
-//var fire = {{ fire }};
 var radius = 4.5;
 
 var map = L.map('map').setView([40.707895, -73.931150], 10).setMaxBounds([[40.95708558389897,-73.43673706054688],[40.457397087754444,-74.42550659179688]]);
@@ -33,7 +30,7 @@ var selecting = function(obj){
 var disselect = function(obj, health, htmldisplay){
     if(health == "Good") obj.style("fill","green");
     else if(health == "Poor") obj.style("fill", "yellow");
-    else if(health = "Fair") return "orange";
+    else if(health = "Fair") obj.style("fill", "orange");
     //else if ()
 
     if(htmldisplay != null) info.removeChild(htmldisplay);
@@ -42,7 +39,7 @@ var disselect = function(obj, health, htmldisplay){
 var display = function(data){
     var d = document.createElement("div");
     d.className = "display";
-    d.innerHTML = (`${data["address"]} ${data["boroname"]} ${data["zip_city"]} ${data["zipcode"]}`);
+    d.innerHTML = (`<b>${data["address"]} ${data["boroname"]} ${data["zip_city"]} ${data["zipcode"]} </b> <br>Species: ${data["spc_common"]} <br>Problems: ${data["problems"]} <br> Status: ${data["status"]} <br> Health: ${data["health"]}`);
     info.appendChild(d);
     return d;
 }

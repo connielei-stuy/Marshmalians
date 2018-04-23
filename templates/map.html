@@ -19,23 +19,12 @@
       <h1> New York City Neighborhoods </h1>
       <p> Welcome to our data analysis of the neighborhoods of New York City. You can see the displacement of trees throughout NYC, as well as crimes or fires reported and the origin of the reports. You can also look at homeless centers throughout NYC and compare it to the number of trees in the area or crimes or housefires reported. </p>
 
-      <table>
-        <td>
          <h3> Select the data you would like to compare:     </h3>
       <div class="form-check">
 	<input type="checkbox" class="form-check-input" id="trees" checked="checked">
-	<label class="form-check-label" for="checkbox100">Trees of NYC</label>
+	<label class="form-check-label" for="checkbox100">Trees of NYC (Green-Healthy, Orange-Fair, Yellow-Poor)</label>
       </div>
 
-      <div class="form-check">
-	<input type="checkbox" class="filled-in form-check-input" id="fires">
-	<label class="form-check-label" for="checkbox101">Housefires reported</label>
-      </div>
-
-      <div class="form-check">
-	<input type="checkbox" class="form-check-input" id="crime">
-	<label class="form-check-label" for="checkbox100">Crimes reported</label>
-      </div>
 
       <div class="form-check">
 	<input type="checkbox" class="filled-in form-check-input" id="shelters">
@@ -46,24 +35,11 @@
 	<label class="form-check-label" for="checkbox101">Rat sightings</label>
       </div>
       
-    </td>
-    <td>
-    </td>
-    <td>
-  <h3> Circles Key </h3>
-  <p> Green : Healthy <br>
-   Orange : Fair <br>
-   Yellow : Poor
-   </p>
- </td>
-
-  </table>
-
-
+  
     <div class="row">
       <div class="col-lg-6" id="map" style="width:60em; height:40em"></div>
       <!--Div to add info about selected item -->
-      <div style="float:right; border: 4px solid black; " class="col-lg-6" id="info"> Info </div>
+      <div style="float:right;" class="col-lg-6" id="info"></div>
     </div>
     <br><br>
     </div>

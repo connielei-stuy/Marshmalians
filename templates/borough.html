@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sums</title>
+  <title>Sums</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/static/layout.css">
 </head>
 <body>
+  <div class="container">
     <h1 class="centered">Totals</h1>
     <h3 class="centered">Click on a borough below to filter the data displayed on this page</h3>
     <p class="centered">
@@ -17,13 +19,15 @@
     </p>
     <h2 class="centered">A Pie Chart of The Species of Trees Found in {{ borough }}</h2>
     <div id="pieChart"></div>
-    <h2 class="centered">A Table of Tree Species Frequency, Sorted Alphabetically</h2>
+    <h2 class="centered">A Table of Tree Species Frequency,<br>Sorted Alphabetically</h2>
     <div id="speciesTableContainer">
         <table id="speciesTable" border="1" class="info"><tr><th>Species Name</th><th>Amount of trees of this type</th></tr></table>
     </div>
+    <br>
     <h2 class="centered">Frequency of Tree Diameters, Measured in Inches at 1.3m Off the Ground</h2>
     <h3 class="centered">X axis: frequency; Y axis: inches</h3>
     <div id="barChart"></div>
+    </div>
     <div class="grayBox centered">
         <a href="/">About the Project</a>
         <a href="/charts/map.html">See the Map</a>

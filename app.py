@@ -46,7 +46,7 @@ if __name__ == "__main__":
     data.load("data/trees_1k_2015.csv", "trees")
     data.load("data/trees_10k_2015.csv", "trees2")
     data.load("data/housefires.csv", "fires")
-    #data.load("data/homeless_shelters.csv", "shelters")
-    #data.load("data/rat_sightings_2015.csv", "rats")
+    data.load("data/homeless_shelters.csv", "shelters")
+    data.load("data/rat_sightings_2015.csv", "rats")
     app.debug = True
     app.run()

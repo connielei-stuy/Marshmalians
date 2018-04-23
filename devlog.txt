@@ -71,3 +71,6 @@ cut rat_sightings_2015.csv to 1000 results for user readibiliity and added color
 
 chengC -- 2018-04-22 1:28:00
 added different sizes to different datasets
+
+ahmedF -- 2018-04-13 01:31:50
+Added some front end, added more info for trees
