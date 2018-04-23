@@ -51,9 +51,23 @@ Fixed and created the pie chart.
 ahmedF -- 2018-04-19 00:10:32
 Added rat sighting data, need to personalize style attributes for each type
 
+chengC -- 2018-04-19 5:10:00
+Added a zoom feature (circles are smaller farther away and bigger up close), cannot zoom out
+
 zlotskiyM -- 2018-04-20 10:33:00
 Moved all the CSS into a stylesheet and made the styles more consistent across pages, including the navbar.
+
+chengC -- 2018-04-20 5:00:00
+can now zoom out as well as zoom in
+
+chengC -- 2018-04-20 8:00:00
+created file to convert addresses to long and lat coordinates using google maps api
 
 zlotskiyM -- 2018-04-22 12:08:00
 Created a bar chart to show tree diameters.
 
+chengC -- 2018-04-22 1:08:00
+cut rat_sightings_2015.csv to 1000 results for user readibiliity and added colors to different datasets
+
+chengC -- 2018-04-22 1:28:00
+added different sizes to different datasets
