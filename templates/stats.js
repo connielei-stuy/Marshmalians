@@ -154,7 +154,7 @@ d3.select("#barChart").selectAll(".bar")
     .text(function (d) {
         return d.key;
     })
-    .transition().duration(2000)
+    .transition().delay(2000).duration(2000)
     .style("width", function(d) {
         return (10 * parseInt(d.value)) + "px";
     });

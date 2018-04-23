@@ -54,3 +54,14 @@ table.info tr:nth-child(odd) {background-color: #E0CABA;}/*#D4AC90;*/
 .grayBox a:hover {
     text-decoration: underline;
 }
+/* zipcodes.html */
+#zip_svg {
+    border: 1px solid black;
+}
+#tooltip {
+    position: fixed;
+    width: 300px;
+    top: 10em;
+    right: 0px;
+    border: 1px solid #aaa;
+}

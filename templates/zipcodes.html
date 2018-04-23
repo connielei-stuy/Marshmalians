@@ -6,13 +6,83 @@
     </head>
     <body>
         <h1 class="centered">Correlating Data By Zipcode</h1>
-        <svg xmlns="http://www.w3.org/2000/svg" id="svg"></svg>
+        <p id="tooltip">Hover over a dot</p>
+        <div style="display: inline-block; border: 1px solid #222;">
+            <p><u>Fires</u></p>
+            <div style="display: inline-block; width: 2em;">
+                <span style="display:block; height:100px;">200</span>
+                <span style="display:block; height:100px;">175</span>
+                <span style="display:block; height:100px;">150</span>
+                <span style="display:block; height:100px;">125</span>
+                <span style="display:block; height:100px;">100</span>
+                <span style="display:block; height:100px;">75</span>
+                <span style="display:block; height:100px;">50</span>
+                <span style="display:block; height:100px;">25</span>
+                <span style="display:block; height:100px;">0</span>
+            </div>
+            <div style="display: inline-block;">        
+                <svg xmlns="http://www.w3.org/2000/svg" id="zip_svg" width="720" height="800"></svg>
+            </div>
+            <div style="margin-top: -4em;">
+                <span style="display:inline-block; width:100px; margin-left: 2em;">0</span>
+                <span style="display:inline-block; width:100px;">25</span>
+                <span style="display:inline-block; width:100px;">50</span>
+                <span style="display:inline-block; width:100px;">75</span>
+                <span style="display:inline-block; width:100px;">100</span>
+                <span style="display:inline-block; width:100px;">125</span>
+                <span style="display:inline-block; width:100px;">150</span>
+                <p class="centered"><u>Number of Trees Counted in the Zipcode</u></p>
+            </div>
+        </div>
         <p>Each point on the scatter plot above is a zipcode in NYC. Its x-coordinae is the amount of trees counted there. Its y-coordinate is the number of fires reported there.</p>
+        <p>With our limited dataset, it is difficult to establish a correlation. Ten thousand trees and ten thousand fire reports were used to plot the points on this graph.</p>
         <div class="grayBox centered">
             <a href="/">About the Project</a>
             <a href="/charts/map.html">See the Map</a>
             <a href="/charts/boroughs.html">Statistics on each borough</a>
             <a href="/charts/plot.html">Fire and forestry scatter plots</a>
         </div>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3/4.7.2/d3.min.js"></script>
+        <script type="text/javascript">
+            var trees = {{ trees | tojson }};
+            var fires = {{ fires | tojson }};
+            var pointsObject = {};
+            for(var k in trees) {
+                pointsObject[k] = {x: trees[k], y: 0};
+            }
+            for(var k in fires) {
+                if(pointsObject[k] != undefined) {
+                    pointsObject[k].y = fires[k];
+                } else {
+                    pointsObject[k] = {x: 0, y: fires[k]};
+                }
+            }
+            var pointsList = [];
+            for(var k in pointsObject) {
+                pointsList.push({
+                    zipcode: k,
+                    x: pointsObject[k].x,
+                    y: pointsObject[k].y
+                });
+            }
+            var h = parseInt(d3.select("#zip_svg").attr("height")), w = parseInt(d3.select("#zip_svg").attr("width"));
+            var tooltip = d3.select("#tooltip");
+            var xscale = 4;
+            var yscale = 4;
+            d3.select("#zip_svg").selectAll("circle")
+                .data(pointsList).enter()
+                .append("circle")
+                .attr("cx", 0).attr("cy", 0).attr("fill", "blue").attr("r", 5)
+                .attr("title", function(d) {return d.zipcode;})
+                .on("mouseover", function() {
+                    var self = d3.select(this);
+                    self.attr("fill", "#82CAFF");
+                    tooltip.html("Trees: " + parseInt(self.attr("cx")/xscale) + "<br>Fires: " + parseInt((h - self.attr("cy"))/yscale) + "<br>Zipcode: " + self.attr("title"));
+                })
+                .on("mouseout", function() {d3.select(this).attr("fill", "blue");})
+                .transition().duration(1000)
+                .attr("cx", function(d) {return xscale * d.x;})
+                .attr("cy", function(d) {return h - yscale * d.y;});
+        </script>
     </body>
 </html>
