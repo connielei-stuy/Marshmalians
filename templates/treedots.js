@@ -134,19 +134,19 @@ var dots = function(collection, type) {
       if ( (41.20552261955812 - bounds['_northEast'].lat  >= .1) && ( -73.18817138671874 - bounds['_northEast'].lng >= .1) ) {
           if (collection == shelters){
           radius = 8 - (2*((-74.30191040039062 - bounds['_southWest'].lng)/.1 ));
-          console.log("shelter: " + radius);
+          //console.log("shelter: " + radius);
           }
           else if (collection == rats){
           radius = 2 - (1.25*((-74.30191040039062 - bounds['_southWest'].lng)/.1 ));
-          console.log("rats: "  + radius);
+          //console.log("rats: "  + radius);
           }
           else{
           radius = 4.2 - (2*((-74.30191040039062 - bounds['_southWest'].lng)/.1 ));
-          console.log("trees: " +radius);
+          //console.log("trees: " +radius);
           }
         }
 
-      console.log("RADIUS RN : " + radius);
+      //console.log("RADIUS RN : " + radius);
     feature.attr("r", radius);
 	feature.attr("transform", function(d) { return "translate("+ map.latLngToLayerPoint(d.LatLng).x +","+ map.latLngToLayerPoint(d.LatLng).y +")"; })
   //console.log("PRINTING");
@@ -169,6 +169,9 @@ var plot = function() {
     }
     else{
         g.selectAll("circle" + "." + this.id).remove();
+	while(info.hasChildNodes()){
+	    info.firstElementChild.remove();
+	}
     }
 }
 
@@ -179,7 +182,3 @@ var filters = document.getElementsByClassName("form-check-input");
 for(var i=0; i < filters.length; i++){
     filters[i].addEventListener("click", plot);
 }
-
-//dots(crime, "crime");
-//dots(shelters, "shelters");
-//dots(fire, "fire");
